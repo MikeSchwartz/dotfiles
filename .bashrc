@@ -89,6 +89,9 @@ shopt -s checkwinsize
 shopt -s histappend
 export HISTCONTROL=ignoredups:erasedups
 export HISTTIMEFORMAT="%h/%d - %H:%M:%S "
+alias h5='history | tail -5'
+alias h10='history | tail -10'
+alias h20='history | tail -20'
 
 # Easier way to view path
 alias path='echo -e ${PATH//:/\\n}'
