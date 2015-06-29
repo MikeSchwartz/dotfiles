@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells. 
+# ~/.bashrc: executed by bash(1) for non-login shells.  X
 
 echo "Hello from .bashrc"
 
