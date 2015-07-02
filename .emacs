@@ -1,1 +1,1 @@
-(setq vc-follow-symlinks nil) 
+(setq vc-follow-symlinks nil)
