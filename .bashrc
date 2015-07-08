@@ -183,7 +183,6 @@ export PS1="$TITLEBAR\[$(tput bold)\]$MY_PROMPT_HOSTNAME \w \u [\!] $\[$(tput sg
 # PS1 works although not bolded. Instead it's blue - my guess
 # it's coming from an emacs setting.
 #
-#
 ################################################################
 case "$TERM" in
     dumb)
