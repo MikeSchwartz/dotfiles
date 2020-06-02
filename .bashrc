@@ -1,13 +1,12 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-
-echo "Hello from .bashrc"
-
 #
-# REMINDER: ~/.bash-profile is run for interactive login shells, and ~/.bashrc 
-# is run for # interactive (but not login) shells. Put whatever you # want to run
+# Reminder: ~/.bash-profile is run for interactive login shells, and ~/.bashrc 
+# is run for interactive  - but not login -  shells. Put whatever you want to run
 # in both login and other interactive shells in ~/.bashrc and source ~/.bashrc in
 # ~/.bash_profile. 
 #
+
+echo "Hello from .bashrc"
 
 #
 # Reminder: if ~/.bashrc is found, then ~/.profile won't be run. So source it here.
@@ -75,8 +74,9 @@ alias mkdir='mkdir -p'
 
 export EDITOR=emacs
 
-export PATH=/Users/Mike/bin:$PATH
-export PATH=/usr/local/mysql/bin:$PATH
+# uh... this doesn't work unless my user name is the same everywhere,
+# and it's not. Ugly hack in the meantime.
+export PATH=/Users/mschwartz/bin:/Users/Mike/bin:$PATH
 
 FIGNORE="~"
 
@@ -96,7 +96,14 @@ alias h20='history | tail -20'
 # Easier way to view path
 alias path='echo -e ${PATH//:/\\n}'
 
-# Prompt
+# Prompt. 
+#
+# uh... I dont' remember exactly what this is for. I *think*
+# it's trying to get history appended after every command in 
+# cases where "shopt -s histappend" doesn't work. But [a] I
+# vaguely recall this being related to emacs shells, but am 
+# not sure and [b] I don't know why this solution wouldn't
+# be good enough in all cases. 
 unset PROMPT_COMMAND
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
@@ -110,8 +117,8 @@ bind "set show-all-if-ambiguous On" # this allows you to automatically show comp
 #
 # Finder hacks. Quickly make the Finder show and not show hidden files
 #
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 
 #
@@ -150,32 +157,25 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 # \]  End a sequence of non-printing characters
 # 
 
+# If the host name is ridiculously long, shorten it.
+# I can't remember why the export.
 if [ $HOSTNAME = "Mikes-Personal-MacBook-Air.local" ]; then
-    export MY_PROMPT_HOSTNAME="MAC";
+    export MY_PROMPT_HOSTNAME="Personal Mac";
 else
     export MY_PROMPT_HOSTNAME="\h";
 fi
 
-# Titlebar. Not working yet so even the xterm case is a no-op
-case $TERM in
-    xterm*)
-	TITLEBAR='\[\033]0;\u@\h:\w\007\]'
-	TITLEBAR=''
-	;;
-    *)
-	TITLEBAR=''
-	;;
-esac
-
-export PS1="$TITLEBAR\[$(tput bold)\]$MY_PROMPT_HOSTNAME \w \u [\!] $\[$(tput sgr0)\] "
+export PS1="\[$(tput bold)\]$MY_PROMPT_HOSTNAME \w \u [\!] $\[$(tput sgr0)\] "
 
 
 ################################################################
 #
-# Alas poor Emacs
+# Alas poor Emacs.
 #
-# First prompt painted by Emacs still looks wrong. =( But
-# after first RET it looks ok. Don't know why.
+# May 2016: This is some old stuff that was in here due to some
+# shell problems with emacs. But the problems are not occuring
+# anymore, and I'm don't remember what the trap stuff is about
+# anyhow. Apparently I 
 #
 # Too bad, because I would like to use the PROMPT_COMMAND. Maybe
 # someday I will figure it out.
@@ -184,11 +184,12 @@ export PS1="$TITLEBAR\[$(tput bold)\]$MY_PROMPT_HOSTNAME \w \u [\!] $\[$(tput sg
 # it's coming from an emacs setting.
 #
 ################################################################
-case "$TERM" in
-    dumb)
-	PROMPT_COMMAND=
-	;;
-    *)
-	trap 'printf "\033]0;  `history 1 | cut -b8-`  \007"' DEBUG
-	;;
-esac
+# case "$TERM" in
+#     dumb)
+# 	PROMPT_COMMAND=
+# 	;;
+#     *)
+# 	trap 'printf "\033]0;  `history 1 | cut -b8-`  \007"' DEBUG
+# 	;;
+# esac
+

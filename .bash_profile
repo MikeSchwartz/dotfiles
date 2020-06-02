@@ -1,6 +1,6 @@
 #
 # Reminder: ~/.bash-profile is run for interactive login shells, and ~/.bashrc 
-# is run for # interactive (but not login) shells. Put whatever you # want to run
+# is run for interactive  - but not login -  shells. Put whatever you want to run
 # in both login and other interactive shells in ~/.bashrc and source ~/.bashrc in
 # ~/.bash_profile. 
 #
