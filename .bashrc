@@ -120,7 +120,6 @@ bind "set show-all-if-ambiguous On" # this allows you to automatically show comp
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
-
 #
 # Prompts and terminal title bars
 #
@@ -157,39 +156,16 @@ alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 # \]  End a sequence of non-printing characters
 # 
 
+#
 # If the host name is ridiculously long, shorten it.
-# I can't remember why the export.
+#
 if [ $HOSTNAME = "Mikes-Personal-MacBook-Air.local" ]; then
-    export MY_PROMPT_HOSTNAME="Personal Mac";
+    export MY_PROMPT_HOSTNAME="PersonalMac";
 else
     export MY_PROMPT_HOSTNAME="\h";
 fi
 
+#
+# Prompt
+#
 export PS1="\[$(tput bold)\]$MY_PROMPT_HOSTNAME \w \u [\!] $\[$(tput sgr0)\] "
-
-
-################################################################
-#
-# Alas poor Emacs.
-#
-# May 2016: This is some old stuff that was in here due to some
-# shell problems with emacs. But the problems are not occuring
-# anymore, and I'm don't remember what the trap stuff is about
-# anyhow. Apparently I 
-#
-# Too bad, because I would like to use the PROMPT_COMMAND. Maybe
-# someday I will figure it out.
-#
-# PS1 works although not bolded. Instead it's blue - my guess
-# it's coming from an emacs setting.
-#
-################################################################
-# case "$TERM" in
-#     dumb)
-# 	PROMPT_COMMAND=
-# 	;;
-#     *)
-# 	trap 'printf "\033]0;  `history 1 | cut -b8-`  \007"' DEBUG
-# 	;;
-# esac
-
